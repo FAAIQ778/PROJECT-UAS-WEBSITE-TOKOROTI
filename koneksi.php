@@ -1,0 +1,12 @@
+<?php
+$host = "localhost";
+$user = "root";
+$pass = "Ik22474268.";
+$db   = "umkm_toko_roti";
+
+$conn = mysqli_connect($host, $user, $pass, $db);
+
+if (!$conn) {
+    die("Koneksi gagal: " . mysqli_connect_error());
+}
+?>
