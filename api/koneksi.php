@@ -5,10 +5,14 @@ $pass = getenv('DB_PASS') ?: 'Ik22474268.';
 $db   = getenv('DB_NAME') ?: 'umkm_toko_roti';
 $port = getenv('DB_PORT') ?: 3306;
 
-$conn = mysqli_connect($host, $user, $pass, $db, $port);
-$koneksi = $conn; // Alias agar file yang pakai $koneksi atau $conn sama-sama jalan
+// Inisialisasi koneksi dengan SSL khusus TiDB Cloud
+$conn = mysqli_init();
+mysqli_ssl_set($conn, NULL, NULL, NULL, NULL, NULL);
 
-if (!$koneksi) {
+// Hubungkan ke database dengan timeout dan SSL
+if (!mysqli_real_connect($conn, $host, $user, $pass, $db, (int)$port, NULL, MYSQLI_CLIENT_SSL)) {
     die("Koneksi gagal: " . mysqli_connect_error());
 }
+
+$koneksi = $conn; // Alias
 ?>
