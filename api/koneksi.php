@@ -1,12 +1,13 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "umkm_toko_roti";
+$host = getenv('DB_HOST') ?: 'localhost';
+$user = getenv('DB_USER') ?: 'root';
+$pass = getenv('DB_PASS') ?: 'Ik22474268.';
+$db   = getenv('DB_NAME') ?: 'umkm_toko_roti';
+$port = getenv('DB_PORT') ?: 3306;
 
-$conn = mysqli_connect($host, $user, $pass, $db);
+$koneksi = mysqli_connect($host, $user, $pass, $db, $port);
 
-if (!$conn) {
+if (!$koneksi) {
     die("Koneksi gagal: " . mysqli_connect_error());
 }
 ?>
